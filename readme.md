@@ -94,13 +94,10 @@ The only view you could not be familiarized with is the `views/trips/delete.ejs`
 
 ![](https://s3-eu-west-1.amazonaws.com/ih-materials/uploads/upload_4d7259649e9061a228c13927c8ad1694.png)
 
-:::info
-Remember that after each action, we have to redirect the user to the `/my-trips` view to see a list of all the trips.
-:::
+:bulb: Remember that after each action, we have to redirect the user to the `/my-trips` view to see a list of all the trips.
 
-:::info
-This pages are just available to edit the user trips. Feel free to create your own layouts to let the user add/edit/remove trips.
-:::
+
+**These pages are just available to edit the user trips. Feel free to create your own layouts to let the user add/edit/remove trips.**
 
 ### Iteration 3 | Profile Page
 
