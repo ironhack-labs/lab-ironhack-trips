@@ -6,6 +6,7 @@ const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const passport = require("passport");
 const app = express();
 const User = require('./models/User');
 
@@ -33,10 +34,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Authentication
 app.use(session({
-  secret: "ironhack trips"
+  secret: "lkashjdflkjhaslkdjfhalsdfjhaksjhd",
+  resave: true,
+  saveUninitialized: true
 }));
 
 require('./passport/facebook');
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(cookieParser());
 

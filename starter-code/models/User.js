@@ -5,8 +5,8 @@ const userSchema = Schema({
   username: String,
   password: String,
   pic_name: String,
-  provider_id: String,
-  provider_name: String
+  facebookID: String,
+  facebookName: String
 },{
    timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
  });

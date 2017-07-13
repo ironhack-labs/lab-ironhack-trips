@@ -1,1 +1,8 @@
-<a href="/auth/facebook">Login With Facebook</a>
+<% if(user) { %>
+      <p>The user is <%= user.facebookName %></p>
+      <p>The FBID is <%= user.facebookID %></p>
+      <a href="/auth/logout">Logout</a>
+    <% }else{ %>
+      <p>There is no user logged in :-) </p>
+      <a href="/auth/facebook">Login with Facebook</a>
+    <% } %>

@@ -7,8 +7,14 @@ const User = require("../models/User");
 
 authRoutes.get("/facebook", passport.authenticate("facebook"));
 authRoutes.get("/facebook/callback", passport.authenticate("facebook", {
-  successRedirect: "/private",
+  successRedirect: "/",
   failureRedirect: "/"
 }));
+
+
+authRoutes.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
 
 module.exports = authRoutes;
