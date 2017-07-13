@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<% if(user) { %>
+      <p>The user is <%= user.facebookName %></p>
+      <p>The FBID is <%= user.facebookID %></p>
+      <a href="/auth/logout">Logout</a>
+    <% }else{ %>
+      <p>There is no user logged in :-) </p>
+      <a href="/auth/facebook">Login with Facebook</a>
+    <% } %>
