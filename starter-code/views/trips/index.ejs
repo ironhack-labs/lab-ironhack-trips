@@ -1,0 +1,21 @@
+<p>Welcome to <%= title %></p>
+
+      <h1>Hello <%= user.provider_name%></h1>
+      <a href="/my-trips/new">add new trip</a>
+      <a href="/logout">logout</a>
+
+<div class="row">
+  <div class="col-sm-6 col-md-4 trip-panel" >
+    <% for (i=0; i < trips.length; i++) { %>
+      <div class="thumbnail">
+        <img src="<%= trips[i].picPath %>" alt="">
+        <div class="caption">
+          <h3><%= trips[i].user_name %></h3>
+          <h3><%= trips[i].destination %></h3>
+          <p><%= trips[i].description %></p>
+          <p><a href="/my-trips/edit/<%= trips[i]._id%>" class="btn btn-primary" role="button">Edit</a> <a href="/my-trips/delete/<%= trips[i]._id%>" class="btn btn-default" role="button">Delete</a></p>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>

@@ -11,5 +11,3 @@ passport.deserializeUser((id, cb) => {
     cb(null, user);
   });
 });
-
-require('./local');

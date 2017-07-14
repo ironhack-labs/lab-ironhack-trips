@@ -5,6 +5,7 @@ const path = require('path');
 var debug = require('debug')('travel-diaries:'+path.basename(__filename));
 const router  = express.Router();
 
+
 router.get("/facebook", passport.authenticate("facebook"));
 
 router.get("/facebook/callback", passport.authenticate("facebook", {

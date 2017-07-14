@@ -10,9 +10,11 @@ const app            = express();
 const debug = require('debug')('travel-diaries:'+path.basename(__filename));
 const passport      = require("passport");
 const flash = require("connect-flash");
+
 const {dbURL} = require('./config/db');
 const index = require('./routes/index');
 const auth = require('./routes/auth');
+const trips = require('./routes/trips');
 
 mongoose.connect(dbURL).then(
   () => debug("Connected to DB")
@@ -60,7 +62,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Routes
 app.use("/", index);
 app.use("/", auth);
-
+app.use("/my-trips", trips);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
