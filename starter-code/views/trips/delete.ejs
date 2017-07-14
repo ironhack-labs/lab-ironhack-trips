@@ -1,0 +1,8 @@
+<% if (typeof errorMessage !== "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
+
+<div class="delete-panel">
+  <p>are you sure you want to delete this trip?</p>
+  <p><a href="/my-trips/<%= trip._id%>" class="btn btn-primary" role="button">Yes</a> <a href="/my-trips" class="btn btn-default" role="button">No</a></p>
+</div>
