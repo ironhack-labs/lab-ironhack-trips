@@ -38,6 +38,7 @@ TripModel.find(
       res.locals.securityFeedback = req.flash('securityError');
       res.locals.updateFeedback = req.flash('updateSuccess');
       res.locals.listOfTrips = myTrips;
+      res.locals.user = req.user;
 
       res.render('trips/index.ejs');
   }
@@ -184,6 +185,28 @@ router.post('/my-trips/delete/:trip_id', (req,res,next) => {
       res.redirect('/my-trips');
 
     });
+});
+
+router.get('/public-profile/:id', (req,res,next) => {
+
+  TripModel.find(
+    { user_id:  req.params.id },
+    (err, trips) => {
+
+
+        if (err) {
+          next(err);
+          return;
+        }
+
+        res.locals.securityFeedback = req.flash('securityError');
+        res.locals.updateFeedback = req.flash('updateSuccess');
+        res.locals.listOfTrips = trips;
+
+        res.render('trips/public.ejs');
+    });
+
+
 });
 
 

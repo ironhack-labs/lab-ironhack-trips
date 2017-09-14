@@ -1,7 +1,5 @@
 <h2> My Trips </h2>
 
-<a href="/public-profile/<%=user._id%>"> visit user profile </a>
-
 <a href="/my-trips/new"> Add a New Trip </a>
 
 <% if (listOfTrips.length === 0) { %>
@@ -16,10 +14,6 @@
         <img src="<%= trip.pic_path %>">
         <p> <%= trip.description %> </p>
 
-        <a href="/my-trips/edit/<%=trip._id%>"> Edit </a>
-        <br>
-
-        <a href="/my-trips/delete/<%=trip._id%>"> Delete </a>
       </li>
    <%   }); %>
   </ul>
