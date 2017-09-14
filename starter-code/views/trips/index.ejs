@@ -1,0 +1,11 @@
+<h2> List of Your Trips </h2>
+
+<ul>
+    <% listOfTrips.forEach((oneTrip) => { %>
+      <li>
+      <h3><%= oneTrip.destination %></h3>
+      <img src="<%= oneTrip.pic_path %>">
+      <p><%= oneTrip.description %></p>
+      </li>
+    <% }) %>
+  </ul>
