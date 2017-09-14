@@ -10,6 +10,7 @@ const app = express();
 const MongoStore = require('connect-mongo')(session);
 const bcrypt = require("bcrypt");
 const passport = require("passport");
+const FbStrategy = require('passport-facebook').Strategy;
 const LocalStrategy = require("passport-local").Strategy;
 
 // Mongoose configuration
@@ -39,13 +40,14 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Authentication
-const eso= require('./passport/passsport');
+const eso = require('./passport/passsport');
 app.use(session({
   secret: "ironhack trips"
 }));
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
+const fb=require ('./passport/facebook');
 
 // Routes
 const index = require('./routes/views');

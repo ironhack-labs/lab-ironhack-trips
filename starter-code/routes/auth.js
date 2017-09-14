@@ -4,8 +4,11 @@ const passport = require("passport");
 const User = require("../models/user"); //modelo
 const bcrypt = require("bcrypt"); //bcrypt para hashear la contraseña
 const bcryptSalt = 10;
+const FbStrategy = require('passport-facebook').Strategy;
+const { isLoggedIn, isLoggedOut } = require('connect-ensure-login');//no funciona xq?
 
-router.get("/signup", (req, res, next) => {
+
+router.get("/signup",(req, res, next) => {
   res.render("auth/signup");
 });
 
@@ -51,5 +54,9 @@ router.post("/login", passport.authenticate("local", {
   failureFlash: true,
   passReqToCallback: true
 }));
-
+router.get("/auth/facebook", passport.authenticate("facebook"));
+router.get("/auth/facebook/callback", passport.authenticate("facebook", {
+  successRedirect: "/",
+  failureRedirect: "/"
+}));
 module.exports = router;
