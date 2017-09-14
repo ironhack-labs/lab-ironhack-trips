@@ -47,7 +47,7 @@ const auth = require('./routes/auth')
 const trips = require('./routes/trips')
 app.use("/", index)
 app.use("/", auth)
-app.use("/trips", trips)
+app.use("/my-trips", trips)
 
 require('./config/error-handler')(app)
 
