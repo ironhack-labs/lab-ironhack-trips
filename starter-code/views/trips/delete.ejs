@@ -1,0 +1,11 @@
+<h2> Are you sure you want to delete this trip to <%=tripInfo.destination%>? </h2>
+
+<form action="/my-trips/delete/<%=tripInfo._id%>" method="post">
+
+    <button>yes</button>
+</form>
+
+<form action="/my-trips" method="post">
+
+    <button>no</button>
+</form>
