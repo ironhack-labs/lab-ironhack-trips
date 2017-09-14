@@ -1,0 +1,12 @@
+
+<h2> Are you sure you want to delete your trip? <%= tripInfo.destination %> </h2>
+
+<form method="post" action="/my-trips/delete/<%= tripInfo._id %>">
+<button href="/my-trips/delete/<%= tripInfo._id %>">
+  Yes
+</button>
+</form>
+<br />
+<a href="/my-trips/">
+  No
+</a>
