@@ -9,11 +9,11 @@ const mongoose       = require("mongoose");
 const passport       = require("passport");
 const flash          = require("connect-flash");
 const MongoStore     = require("connect-mongo")(session);
-
 const app            = express();
 
 // Controllers
-const index = require('./routes/auth');
+const index = require('./routes/index');
+const auth  = require('./routes/auth');
 
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/ironhack-trips", {useMongoClient:true})
@@ -29,9 +29,7 @@ app.use(expressLayouts);
 app.set("layout", "layouts/main");
 app.use(express.static(path.join(__dirname, "public")));
 
-// Access POST params with body parser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(flash());
 
 // Authentication
 app.use(session({
@@ -40,26 +38,32 @@ app.use(session({
   saveUninitialized: true,
   store: new MongoStore({
   mongooseConnection: mongoose.connection,
-  ttl: 24 * 60 * 60 // 1 day
+  ttl: 24 * 60 * 60
   })
 }));
+app.use(cookieParser());
 
-
+require('./passport/config');
 require('./passport/facebook');
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(cookieParser());
-
 //Title
 app.use((req,res,next) =>{
-  res.locals.title = "Ironhack Trips";
+  res.locals.title = "IronTrips";
   next();
 });
 
+// Access POST params with body parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
 // Routes
-app.use("/", index);
+app.use('/', index);
+app.use('/', auth);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

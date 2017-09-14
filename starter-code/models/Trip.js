@@ -11,6 +11,6 @@ const tripSchema = new Schema({
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });
 
-const User = mongoose.model("Trip", tripSchema);
+const Trip = mongoose.model("Trip", tripSchema);
 
 module.exports = Trip;
