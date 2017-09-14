@@ -1,0 +1,20 @@
+<h2> My Trips </h2>
+
+<a href="/my-trips/new"> Add a New Trip </a>
+
+<% if (listOfTrips.length === 0) { %>
+  <h3> No Trips yet </h3>
+
+  <a href="/my-trips/new"> Add your first trip </a>
+<% } else { %>
+  <ul>
+    <% listOfTrips.forEach(trip => { %>
+      <li>
+        <h3><%= trip.destination %></h3>
+        <img src="<%= trip.pic_path %>">
+        <p> <%= trip.description %> </p>
+
+      </li>
+   <%   }); %>
+  </ul>
+ <%} %>

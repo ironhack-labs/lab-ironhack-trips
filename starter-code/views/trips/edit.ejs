@@ -1,0 +1,24 @@
+<h2> Edit this Trip </h2>
+
+<form action="/my-trips/edit/<%=tripInfo._id%>" method="post" enctype="multipart/form-data">
+
+  <label for="destination">Destination</label>
+  <input  id="destination" type="text" name="destination" value="<%=tripInfo.destination%>">
+  <br>
+
+  <label    for="description">Description</label>
+  <textarea  id="description" type="text" name="description" placeholder="<%=tripInfo.description%>"></textarea>
+  <br>
+
+  <p> Current photo: </p>
+  <img src="<%=tripInfo.pic_path%>">
+  <br>
+
+  <label for="photos"> Photo </label>
+  <input  id="photos" name="photo" type="file">
+  <br>
+
+
+  <button> Save Changes </button>
+
+</form>
