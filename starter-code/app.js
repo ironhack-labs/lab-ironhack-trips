@@ -6,9 +6,11 @@ const logger         = require("morgan");
 const cookieParser   = require("cookie-parser");
 const bodyParser     = require("body-parser");
 const mongoose       = require("mongoose");
+
 const app            = express();
 
-// Controllers
+// Controller
+const index = require('./routes/index')
 
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/ironhack-trips");
@@ -20,7 +22,7 @@ app.use(logger("dev"));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(expressLayouts);
-app.set("layout", "layouts/main-layout");
+app.set("layout", "layouts/main");
 app.use(express.static(path.join(__dirname, "public")));
 
 // Access POST params with body parser
@@ -34,7 +36,7 @@ app.use(session({
 app.use(cookieParser());
 
 // Routes
-// app.use("/", index);
+app.use("/", index);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
