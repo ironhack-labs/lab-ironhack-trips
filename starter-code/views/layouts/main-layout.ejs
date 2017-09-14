@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <nav>
+      <a href="/my-trips"> My Trips </a>
+      <br>
+      <a href="/my-trips/new"> Create a Trip </a>
+      <br>
+      <a href="/auth/facebook"> Log In with Facebook </a>
+    </nav>
+
+    <%- body %>
+  </body>
+</html>
