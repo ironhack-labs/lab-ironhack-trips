@@ -1,0 +1,26 @@
+<h2> Your Trips </h2>
+
+<% if (securityFeedback.length > 0) { %>
+  <p class="error-message"> <%= securityFeedback %> </p>
+  <% } %>
+
+<% if (listOfTrips.length === 0) { %>
+  <h3> You don't have any rooms yet </h3>
+  <a href="/my-trips/new"> Add Your First Trip </a>
+<% } else { %>
+  <% if (updateFeedback.length > 0) { %>
+    <p class="success-message"> <%= updateFeedback %> </p>
+    <% } %>
+
+  <ul>
+  <%  listOfTrips.forEach((oneTrip) => { %>
+      <li>
+        <h3> <%= oneTrip.name %> </h3>
+        <img src="<%= oneTrip.photoUrl %>"
+        <p> <%= oneTrip.desc %> </p>
+
+        <a href="/my-trips/edit/<%= oneTrip._id %>"> Edit </a>
+      </li>
+  <%  }) %>
+  </ul>
+<% } %>

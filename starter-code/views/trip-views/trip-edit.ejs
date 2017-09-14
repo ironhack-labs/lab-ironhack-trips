@@ -1,0 +1,23 @@
+<h2> Edit a Trip </h2>
+
+<form method="post" action="/rooms/<%= tripInfo._id %>" enctype="multipart/form-data">
+  <label for="trip-name-input"> Room Name </label>
+  <input id="trip-name-input" name="tripName" type="text"
+    value="<%= tripInfo.name %>">
+    <br>
+
+    <p> Current Photo: </p>
+    <img src="<%= tripInfo.photoUrl %>" >
+    <br>
+
+  <label for="trip-input"> Upload a New Photo (optional) </label>
+  <input id="trip-input" name="tripPhoto" type="file">
+    <br>
+
+  <label for="desc-input"> Description </label>
+  <textarea id="desc-input" name="tripDesc" placeholder="Beautiful">
+    <%= tripInfo.desc %></textarea>
+  <br>
+
+  <button> Save This Room </button>
+</form>
