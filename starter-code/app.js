@@ -36,6 +36,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
   secret: "ironhack trips"
 }));
+
+
+passport.serializeUser((user, cb) => {
+  cb(null, user._id);
+});
+
+passport.deserializeUser((id, cb) => {
+  User.findOne({ "_id": id }, (err, user) => {
+    if (err) { return cb(err); }
+    cb(null, user);
+  });
+});
+
 app.use(cookieParser());
 
 passport.use(new FbStrategy({
@@ -53,7 +66,7 @@ passport.use(new FbStrategy({
 
     const newUser = new User({
       provider_id: profile.id,
-      provider_name: user.displayName,
+      provider_name: profile.displayName,
     });
 
     newUser.save((err) => {
@@ -65,6 +78,8 @@ passport.use(new FbStrategy({
   });
 
 }));
+
+app.use(passport.initialize());
 
 // Routes
 app.use("/", index);
