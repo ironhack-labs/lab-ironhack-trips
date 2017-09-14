@@ -11,6 +11,7 @@ const authRoutes     = require('./routes/auth')
 const FbStrategy     = require('passport-facebook').Strategy
 const MongoStore     = require("connect-mongo")(session)
 const passport       = require('passport')
+const flash          = require("connect-flash")
 
 // Controllers
 require('dotenv').config()
@@ -27,6 +28,7 @@ app.set("view engine", "ejs")
 app.use(expressLayouts)
 app.set("layout", "layouts/main-layout")
 app.use(express.static(path.join(__dirname, "public")))
+app.use(flash())
 
 // Access POST params with body parser
 app.use(bodyParser.json())
