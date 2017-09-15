@@ -1,0 +1,13 @@
+<h2>Trips</h2>
+<a href='/my-trips/new'>Add a New Trip</a><br />
+<h2>List of Trips</h2>
+<% if(tripsList.length === 0){ %>
+  <h3>You currently do not have any trips.</h3>
+<%}else {%>
+  <%tripsList.forEach((oneTrip)=>{%>
+    <img style="height:200px"src="<%= oneTrip.pic_path%>"/>
+    <h4><%= oneTrip.name %></h4>
+    <p><strong><%= oneTrip.destination%></strong></p>
+    <p><%= oneTrip.description%></p><br>
+    <a href='/my-trips/edit/<%=oneTrip._id%>'>Edit</a><br>
+  <%});}%>
