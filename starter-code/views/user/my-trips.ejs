@@ -1,0 +1,12 @@
+<ul>
+  <% trips.forEach(trip => { %>
+    <li>
+      Destination: <%trip.destination%> <br>
+      <%trip.pic_path%> <br>
+      Description: <%trip.description%>
+    </li>
+  <% }) %>
+</ul>
+
+<a href="<%= PATHS.MYTRIPS_NEW_PATH %>">New post</a> <br>
+<a href="<%= PATHS.LOGOUT_PATH %>">Log out</a>

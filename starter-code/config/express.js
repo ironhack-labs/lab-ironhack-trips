@@ -5,7 +5,8 @@ const logger = require('morgan')
 const path = require('path')
 const mongoose = require('mongoose')
 const expressLayouts = require('express-ejs-layouts')
-const pathsProvider = require('./middlewares/paths-provider');
+const authenticated = require('./middlewares/authenticated')
+const pathsProvider = require('./middlewares/paths-provider')
 const session = require('./middlewares/session')
 const passport = require('./passport')
 const rootPath = require('path').normalize(__dirname + '/../')
@@ -27,5 +28,6 @@ module.exports = app => {
   app.use(session(mongoose.connection))
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(authenticated)
   app.use(pathsProvider)
 }

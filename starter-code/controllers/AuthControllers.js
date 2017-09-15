@@ -1,10 +1,10 @@
 const passport = require('passport')
-const User = require('../models/User')
+const PATHS = require('../routes/paths')
 
 module.exports = {
   facebook: passport.authenticate("facebook"),
   facebookCallback: passport.authenticate("facebook", {
-    successRedirect: "/",
-    failureRedirect: "/"
+    successRedirect: PATHS.MYTRIPS_PATH,
+    failureRedirect: PATHS.ROOT_PATH
   })
 }
