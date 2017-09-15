@@ -11,6 +11,9 @@ const { isLoggedIn, isLoggedOut } = require('connect-ensure-login');//no funcion
 router.get("/signup",(req, res, next) => {
   res.render("auth/signup");
 });
+router.get("/mytrips",(req, res, next) => {
+  res.render("my-trips");
+});
 
 router.post("/signup", (req, res, next) => {
   const username = req.body.username;
@@ -39,7 +42,7 @@ router.post("/signup", (req, res, next) => {
       if (err) {
         res.render("auth/signup", { message: "Something went wrong" });
       } else {
-        res.redirect("/");
+        res.redirect("/mytrips");
       }
     });
   });
@@ -49,14 +52,14 @@ router.get("/login", (req, res, next) => {
 });
 
 router.post("/login", passport.authenticate("local", {
-  successRedirect: "/",
+  successRedirect: "/mytrips",
   failureRedirect: "/login",
   failureFlash: true,
   passReqToCallback: true
 }));
 router.get("/auth/facebook", passport.authenticate("facebook"));
 router.get("/auth/facebook/callback", passport.authenticate("facebook", {
-  successRedirect: "/",
+  successRedirect: "/mytrips",
   failureRedirect: "/"
 }));
 module.exports = router;
