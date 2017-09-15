@@ -6,6 +6,7 @@ const logger         = require("morgan");
 const cookieParser   = require("cookie-parser");
 const bodyParser     = require("body-parser");
 const mongoose       = require("mongoose");
+const MongoStore = require("connect-mongo")(session);
 const app            = express();
 
 const passport = require('passport')
@@ -30,14 +31,19 @@ app.use(express.static(path.join(__dirname, "public")));
 // Access POST params with body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({
+  secret: "our-passport-local-strategy-app",
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
 app.use(passport.initialize())
 app.use(passport.session())
 // Authentication
-app.use(session({
-  secret: "ironhack trips",
-  resave: true,
-  saveUnitialized: true
-}));
+
 app.use(cookieParser());
 require('./config/serializers');
 require('./config/fbStrategy');
