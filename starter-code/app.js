@@ -8,8 +8,12 @@ const bodyParser     = require("body-parser");
 const mongoose       = require("mongoose");
 const app            = express();
 
-// Controllers
+const passport = require('passport')
 
+// Controllers
+const index = require('./routes/index')
+const authRoutes = require('./routes/authroutes')
+const trip = require('./routes/trips')
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/ironhack-trips");
 
@@ -26,16 +30,22 @@ app.use(express.static(path.join(__dirname, "public")));
 // Access POST params with body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(passport.initialize())
+app.use(passport.session())
 // Authentication
 app.use(session({
-  secret: "ironhack trips"
+  secret: "ironhack trips",
+  resave: true,
+  saveUnitialized: true
 }));
 app.use(cookieParser());
-
+require('./config/serializers');
+require('./config/fbStrategy');
 // Routes
 // app.use("/", index);
-
+app.use('/', index);
+app.use('/', authRoutes)
+app.use('/', trip)
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error("Not Found");
