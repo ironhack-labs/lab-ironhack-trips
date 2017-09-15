@@ -6,10 +6,15 @@ const logger         = require("morgan");
 const cookieParser   = require("cookie-parser");
 const bodyParser     = require("body-parser");
 const mongoose       = require("mongoose");
+const MongoStore = require("connect-mongo")(session);
 const app            = express();
+const multer = require('multer')
+const passport = require('passport')
 
 // Controllers
-
+const index = require('./routes/index')
+const authRoutes = require('./routes/authroutes')
+const trip = require('./routes/trips')
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/ironhack-trips");
 
@@ -26,16 +31,27 @@ app.use(express.static(path.join(__dirname, "public")));
 // Access POST params with body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-// Authentication
 app.use(session({
-  secret: "ironhack trips"
+  secret: "our-passport-local-strategy-app",
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
 }));
-app.use(cookieParser());
+app.use(passport.initialize())
+app.use(passport.session())
+// Authentication
 
+app.use(cookieParser());
+require('./config/serializers');
+require('./config/fbStrategy');
 // Routes
 // app.use("/", index);
-
+app.use('/', index);
+app.use('/', authRoutes)
+app.use('/', trip)
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error("Not Found");
