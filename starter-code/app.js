@@ -8,10 +8,15 @@ const bodyParser     = require("body-parser");
 const mongoose       = require("mongoose");
 const app            = express();
 
-// Controllers
+const passport = require('passport');
+
+
+require('dotenv').config();
+require('./config/passport-config.js');
 
 // Mongoose configuration
-mongoose.connect("mongodb://localhost/ironhack-trips");
+mongoose.connect(process.env.MONGODB_URI);
+
 
 // Middlewares configuration
 app.use(logger("dev"));
@@ -19,6 +24,7 @@ app.use(logger("dev"));
 // View engine configuration
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+app.locals.title = 'Trip diary';
 app.use(expressLayouts);
 app.set("layout", "layouts/main-layout");
 app.use(express.static(path.join(__dirname, "public")));
@@ -29,11 +35,40 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Authentication
 app.use(session({
-  secret: "ironhack trips"
+  secret: "ironhack trips",
+  resave: true,
+  saveUninitialized: true
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(cookieParser());
 
+
+app.use((req, res, next) => {
+  if (req.user){
+      res.locals.currentUser = req.user;
+  }
+
+  else {
+    res.locals.currentUser = null;
+  }
+
+  next();
+});
+
+
+
 // Routes
+const index = require('./routes/index');
+app.use('/', index);
+
+const myAuthRoutes = require('./routes/auth-router.js');
+app.use(myAuthRoutes);
+
+const myTripRoutes = require('./routes/trip-router.js');
+app.use(myTripRoutes);
+
 // app.use("/", index);
 
 // catch 404 and forward to error handler
