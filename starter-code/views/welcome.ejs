@@ -1,3 +1,7 @@
 </h1> You successfully logged in </h1>
-
+<% trips.forEach((trip)=>{%>
+  <h3><%= trip.destination%></h3>
+  <p><%= trip.description%></p>
+  <img src="<%=trip.image.pic_path%>">
+<%})%>
 <a href="/add">Add trip </a>

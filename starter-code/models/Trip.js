@@ -1,5 +1,5 @@
-const express = require('express')
-const router = express.Router()
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const tripSchema = new Schema ({
   user_id : Schema.Types.ObjectId,
@@ -11,4 +11,4 @@ const tripSchema = new Schema ({
   }
 })
 
-module.exports = router;
+module.exports = mongoose.model('Trip', tripSchema)

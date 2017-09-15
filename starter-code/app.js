@@ -8,7 +8,7 @@ const bodyParser     = require("body-parser");
 const mongoose       = require("mongoose");
 const MongoStore = require("connect-mongo")(session);
 const app            = express();
-
+const multer = require('multer')
 const passport = require('passport')
 
 // Controllers
