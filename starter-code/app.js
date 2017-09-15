@@ -7,12 +7,14 @@ const cookieParser   = require("cookie-parser");
 const bodyParser     = require("body-parser");
 const mongoose       = require("mongoose");
 const app            = express();
+const passport       = require('passport');
 
 // Controllers
 
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/ironhack-trips");
-
+require('./config/passport-config.js');
+require('dotenv').config();
 // Middlewares configuration
 app.use(logger("dev"));
 
@@ -33,8 +35,38 @@ app.use(session({
 }));
 app.use(cookieParser());
 
+app.use(passport.initialize());
+app.use(passport.session());
 // Routes
-// app.use("/", index);
+//app.use("/", index);
+
+app.get('/', (req,res,next)=>{
+  if (req.user) {
+    res.locals.username = req.user.provider_name;
+    res.render('user-home.ejs');
+}
+else{
+  res.locals.title = "Travel Diary";
+  res.render('index');
+}
+});
+
+const authRouter = require('./routes/authRouter.js');
+app.use(authRouter);
+
+const tripRouter = require('./routes/tripRouter.js');
+app.use(tripRouter);
+
+app.use((req, res, next) => {
+    if (req.user) {
+        res.locals.currentUser = req.user;
+    }
+
+    else {
+        res.locals.currentUser = null;
+    }
+    next();
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
