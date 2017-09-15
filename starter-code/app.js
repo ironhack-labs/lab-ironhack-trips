@@ -6,12 +6,16 @@ const logger         = require("morgan");
 const cookieParser   = require("cookie-parser");
 const bodyParser     = require("body-parser");
 const mongoose       = require("mongoose");
+const passport     = require('passport');
 const app            = express();
 
 // Controllers
+require('dotenv').config();
+
+require('./config/passport-config.js');
 
 // Mongoose configuration
-mongoose.connect("mongodb://localhost/ironhack-trips");
+mongoose.connect(process.env.MONGODB_URI);
 
 // Middlewares configuration
 app.use(logger("dev"));
@@ -29,11 +33,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Authentication
 app.use(session({
-  secret: "ironhack trips"
+  secret: "ironhack trips",
+  resave: true,
+  saveUninitialized: true
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(cookieParser());
 
 // Routes
+const index = require('./routes/index');
+app.use('/', index);
 // app.use("/", index);
 
 // catch 404 and forward to error handler
