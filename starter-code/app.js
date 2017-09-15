@@ -15,7 +15,7 @@ require('dotenv').config();
 require('./config/passport-config.js');
 
 // Mongoose configuration
-mongoose.connect("process.env.MONGODB_URI");
+mongoose.connect(process.env.MONGODB_URI);
 
 
 // Middlewares configuration
