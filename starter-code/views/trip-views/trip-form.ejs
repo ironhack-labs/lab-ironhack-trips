@@ -1,0 +1,18 @@
+<h2> Add a Trip </h2>
+
+<form method="post" action="/my-trips" enctype="multipart/form-data">
+  <label for="trip-destination-input"> Trip Destination </label>
+  <input id="trip-destination-input" name="tripName" type="text"
+    placeholder="Amazing View of a Fallen Tree">
+    <br>
+
+  <label for="photo-input"> Photo Upload </label>
+  <input id="photo-input" name="tripPhoto" type="file">
+    <br>
+
+  <label for="desc-input"> Description </label>
+  <textarea id="desc-input" name="tripDesc" placeholder="Beautiful"></textarea>
+  <br>
+
+  <button> Save This Trip </button>
+</form>
