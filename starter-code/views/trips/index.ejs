@@ -1,0 +1,20 @@
+<h2> Trips </h2>
+
+<ul>
+  <% trips.forEach((trip) => { %>
+    <li>
+      GlobeTrotter: <%= trip.user_name %>
+      Destination: <%= trip.destination %>
+      Description: <%= trip.description %>
+      <% pic_path %>
+      <form action="/trips/<%= trip._id%>/delete" method="POST">
+        <button type="submit">Delete Trip</button>
+      </form>
+      <form action="/trips/<%= trip._id%>/edit" method="GET">
+        <button type="submit">Edit Trip</button>
+      </form>
+    </li>
+  <%  }) %>
+</ul>
+
+<a href="trips/new">Add a new trip</a>
