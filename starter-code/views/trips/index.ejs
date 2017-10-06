@@ -1,0 +1,24 @@
+<h2>All trips</h2>
+
+<a href="/trips/new">Add new trip !</a>
+
+<% if (trips.length === 0) { %>
+    <h3>No tripd yet !</h3>
+<% } else { %>
+    <ul>
+    <% trips.forEach(trip => { %>
+        <li>
+            <h3>
+                <%= trip.destination %>
+            </h3>
+            <img src="trip.imgPath">
+            <p>
+                <%= trip.description %>
+                <a href="/trips/edit/<%= trip._id %>">Edit trip</a>
+                <br>
+                <a href="/trips/delete/<%= trip._id %>">Delete trip</a>
+            </p>
+        </li>
+    </ul>
+   <% }) %>
+<% } %>
