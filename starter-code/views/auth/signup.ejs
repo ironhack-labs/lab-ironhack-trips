@@ -1,0 +1,19 @@
+<h2>Signup</h2>
+
+<form action="/signup" method="post">
+    <label>Username <br> <input type="text" name="username" placeholder="Tom Brady"> </label>
+    <br><br>
+    <label>Password <br> <input type="password" name="password" placeholder="0000..."></label>
+    <br><br>
+    <% if (typeof(message) !== 'undefined') { %>
+        <div>
+            <%= message %>
+        </div>
+    <% } %>
+    <br><br>
+    <button>Create account</button>
+
+    <p>
+        Do you already have an account ? <a href="/login">Login</a>
+    </p>
+</form>
