@@ -1,0 +1,9 @@
+<h1>Edit <%= trip.destination %> Trip</h1>
+
+<form action="/my-trips/edit/<%=trip._id%>" method="post">
+  <input type="text" name="destination" id="destination" value="<%=trip.destination%>">
+  <br>
+  <input type="text" name="description" id="description" value="<%=trip.description%>">
+  <br>
+  <button type="submit">Update</button>
+</form>
