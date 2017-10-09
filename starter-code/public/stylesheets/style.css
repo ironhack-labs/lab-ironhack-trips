@@ -6,3 +6,43 @@ body {
 a {
   color: #00B7FF;
 }
+
+h1 {
+	font-size: 5rem;
+}
+
+p {
+	font-size: 1.5rem;
+}
+
+#loginBtn {
+	display: inline-block;
+	background-color: #3B5998;
+	color: white;
+	border-radius: 5px;
+	width: 150px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.container {
+	text-align: center;
+	background-image: url("./img/andrew-church.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+    background-position: center;
+	width: 100%;
+	position: absolute;
+	height: 100%;
+	color: white;
+}
+
+.text-container {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%) 
+}
