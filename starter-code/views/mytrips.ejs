@@ -1,0 +1,16 @@
+<h1>Welcome to your Trips, <%=user.displayName%></h1>
+<a href="/my-trips/new">Add A New Trip</a>
+<a href="/profile/<%=user.id%>">Your Profile</a>
+<h2>Past Trips</h2>
+<%trips.forEach( (trip) => {%>
+	<div class='trip card'>
+		<h4>
+       <%= trip.destination %>
+     </h4>
+		<p>
+			<%= trip.description %>
+		</p>
+		<a href="/mytrips/edit/<%=trip._id%>">Edit Trip</a>
+		<a href="/mytrips/delete/<%=trip._id%>">Delete Trip</a>
+	</div>
+	<%})%>

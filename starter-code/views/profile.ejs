@@ -1,0 +1,12 @@
+<h1><%=user.displayName%>'s Profile</h1>
+<h2>Trips</h2>
+<%trips.forEach( (trip) => {%>
+	<div class='trip card'>
+		<h4>
+      <%= trip.destination %>
+    </h4>
+		<p>
+			<%= trip.description %>
+		</p>
+	</div>
+	<%})%>

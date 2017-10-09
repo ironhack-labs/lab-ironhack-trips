@@ -1,0 +1,5 @@
+<h1>Are you sure you want to delete <%= trip.destination %> Trip ?</h1>
+<form action="/mytrips/delete/<%=trip._id%>" method="post">
+	<button type="submit" name="WhyDidIClickThen" value="1">Yes</button>
+	<button type="submit" name="WhyDidIClickThen" value="0">No</button>
+</form>
