@@ -1,0 +1,15 @@
+<% if (user) { %>
+<a href="/my-trips/new"><button>Add new travel</button></a>
+<a href="/my-trips/"><button>Look your travels</button></a>
+<a href="/logout"><button>Logout</button></a>
+<% } else { %>
+  <a href="/"><button>Login</button></a>
+  <a href="/public-trips"><button>Back to list</button></a>
+<%}%>
+<div>
+  <p><%=result.destination%></p><br>
+<img width="100px" src="<%=result.pic_path%>"><br>
+  <p><%=result.description%></p><br>
+
+</div>
+<a href="/public-trips/"><button>Go back</button></a>

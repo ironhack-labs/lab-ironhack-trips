@@ -6,6 +6,7 @@ const logger         = require("morgan");
 const cookieParser   = require("cookie-parser");
 const bodyParser     = require("body-parser");
 const mongoose       = require("mongoose");
+const MongoStore         = require('connect-mongo')(session);
 const app            = express();
 const bcrypt = require('bcrypt');
 const passport = require("passport");
@@ -70,9 +71,10 @@ passport.use(new FbStrategy({
 }));
 //enable sessions here
 app.use(session({
-  secret: "our-passport-local-strategy-app",
-  resave: true,
-  saveUninitialized: true
+  secret: 'tumblrlabdev',
+  resave: false,
+  saveUninitialized: true,
+  store: new MongoStore( { mongooseConnection: mongoose.connection })
 }));
 //initialize passport and session here
 app.use(passport.initialize());
@@ -81,9 +83,11 @@ app.use(passport.session());
 // Controllers
 const myTripsController = require('./routes/myTripsController');
 const loginController = require('./routes/loginController');
+const publicTripsController = require('./routes/publicTripsController');
 // Routes
 app.use('/', loginController);
 app.use('/my-trips', myTripsController);
+app.use('/public-trips', publicTripsController);
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/ironhack-trips");
 
@@ -99,8 +103,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Access POST params with body parser
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // catch 404 and forward to error handler

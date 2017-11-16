@@ -1,0 +1,10 @@
+<form action="/my-trips/edit/<%=result.id%>" method="post" enctype="multipart/form-data" value="<%=result.user_name%>">
+  <label for="destination">destination</label>
+  <input type="text" name="destination" id="destination" value="<%=result.destination%>">
+  <label for="description">description</label>
+  <textarea type="text" name="description" id="description"><%=result.description%></textarea>
+  <img width="100px" src="<%=result.pic_path%>">
+  <input type="file" name="photo">
+  <button>Edit trip</button>
+</form>
+<a href="/my-trips"><button>Go back</button></a>

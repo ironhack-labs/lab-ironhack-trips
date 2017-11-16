@@ -1,0 +1,5 @@
+<p> Are you sure you want to delete your trip "<%= result.destination %>"</p>
+<form action="/my-trips/delete/<%= result.id %>" method="post">
+  <button>YES</button>
+</form>
+<a href="/my-trips"><button>NO</button></a>
