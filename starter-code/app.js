@@ -9,7 +9,9 @@ const mongoose       = require("mongoose");
 const app            = express();
 
 // Controllers
-
+const index = require('./routes/index');
+const auth = require('./routes/auth');
+const trips = require('./routes/trips');
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/ironhack-trips");
 
@@ -33,8 +35,18 @@ app.use(session({
 }));
 app.use(cookieParser());
 
+//Passport
+require('./passport/facebook');
+require('./passport/serializers');
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Routes
-// app.use("/", index);
+
+app.use("/", index);
+app.use("/", auth);
+app.use("/trips", trips);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
