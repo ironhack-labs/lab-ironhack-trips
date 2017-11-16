@@ -1,0 +1,11 @@
+<% if (user) { %>
+<a href="/my-trips/new"><button>Add new travel</button></a>
+<a href="/my-trips/"><button>Look your travels</button></a>
+<a href="/logout"><button>Logout</button></a>
+<% } %>
+<% if (result.length != 0) { result.forEach((element) => { %>
+<div class="travel">
+  <p><%=element.destination%></p><br>
+<a href="/public-trips/detail/<%=element.id%>"><img width="100px" src="<%=element.pic_path%>"></a><br>
+</div>
+<% })} %>

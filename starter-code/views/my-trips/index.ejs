@@ -1,0 +1,36 @@
+<html>
+
+<head>
+  <title>Travel with me!</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+  <div class="container">
+    <div class="login">
+      <div class="iconNav inline-block">
+        <img class="logoNav" src="/images/palmera.png">
+      </div>
+      <div class="menuNav inline-block">
+        <a href="/my-trips/new"><button>Add new travel</button></a>
+        <a href="/public-trips/"><button>Look travels from other people</button></a>
+        <a href="/logout"><button>Logout</button></a>
+    </div>
+
+
+  </div>
+  <% if (result.length != 0) { result.forEach((element) => { %>
+      <div class="travel inline-block">
+      <img class="photo" src="<%=element.pic_path%>"></img><br>
+      <div class="cityName">
+        <%=element.destination%>
+        <a href="/my-trips/edit/<%= element.id%>"><button>Edit</button></a>
+        <a href="/my-trips/delete/<%= element.id%>"><button>Delete</button></a>
+      </div>
+    </div>
+    <% })} else { %>
+      <p> There isnt any travel here... <a href="/my-trips/new">Why not insert your first?</a></p>
+      <%}%>
+</div>
+</body>
+
+</html>
