@@ -1,10 +1,10 @@
-var express = require('express');
-const passport   = require('passport');
-var authRoutes = express.Router();
-const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
-const FbStrategy = require('passport-facebook').Strategy;
-passport.authenticate("facebook");
-passport.authenticate("facebook");
+// var express = require('express');
+// const passport   = require('passport');
+// var authRoutes = express.Router();
+// const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
+// const FbStrategy = require('passport-facebook').Strategy;
+// passport.authenticate("facebook");
+// passport.authenticate("facebook");
 
 // authRoutes.get("/logout", (req, res) => {
 //   req.logout()
@@ -19,4 +19,4 @@ passport.authenticate("facebook");
 // }));
 //
 //
-module.exports = authRoutes;
+// module.exports = authRoutes;

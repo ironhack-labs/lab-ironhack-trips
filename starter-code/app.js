@@ -1,50 +1,62 @@
 var express = require('express');
+const session  = require('express-session');
+const expressLayouts     = require('express-ejs-layouts');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-const expressLayouts     = require('express-ejs-layouts');
-const session            = require('express-session');
 const mongoose           = require('mongoose');
 const MongoStore         = require('connect-mongo')(session);
-mongoose.connect('mongodb://localhost:27017/tumblr-lab-development');
+const passport   = require('passport');
 const FbStrategy = require('passport-facebook').Strategy;
-var app = express();
+const app = express();
+const LocalStrategy = require("passport-local").Strategy;
 
+const User = require("./models/User");
+
+
+// Mongoose configuration
+mongoose.connect("mongodb://localhost/ironhack-trips");
+
+// Middlewares configuration
+app.use(logger("dev"));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.set('layout', 'layouts/main-layout');
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts);
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(session({
+  secret: "ironhack trips"
+}));
+
+app.use(cookieParser());
+
+
+var index = require('./routes/index');
+// var users = require('./routes/users');
+const authRoutes = require('./routes/auth');
+const trips = require('./routes/trips');
+
+app.use("/", index)
+// app.use("/", authRoutes)
+app.use("/trips", trips)
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-//Passport
-const passport   = require('passport');
 
 //Facebook
-passport.authenticate("facebook");
 
-
-app.get("/logout", (req, res) => {
-  req.logout()
-  res.redirect("/auth/login")
-})
-
-app.get("/facebook", passport.authenticate("facebook"));
-
-app.get("/facebook/callback", passport.authenticate("facebook", {
-  successRedirect: "/trips",
-  failureRedirect: "/",
-}));
+// app.get("/logout", (req, res) => {
+//   req.logout()
+//   res.redirect("/auth/login")
+// })
 
 passport.use(new FbStrategy({
   clientID: "151536418796740",
@@ -73,17 +85,48 @@ passport.use(new FbStrategy({
 
 }));
 
+passport.serializeUser((user, cb) => {
+  cb(null, user._id);
+});
+
+passport.deserializeUser((id, cb) => {
+  User.findOne({ "_id": id }, (err, user) => {
+    if (err) { return cb(err); }
+    cb(null, user);
+  });
+});
+
+passport.use(new LocalStrategy((username, password, next) => {
+  User.findOne({ username }, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return next(null, false, { message: "Incorrect username" });
+    }
+    if (!bcrypt.compareSync(password, user.password)) {
+      return next(null, false, { message: "Incorrect password" });
+    }
+
+    return next(null, user);
+  });
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-var index = require('./routes/index');
-// var users = require('./routes/users');
-const authRoutes = require('./routes/auth');
-const trips = require('./routes/trips');
+app.get("/auth/facebook'", passport.authenticate("facebook"));
 
-app.use("/", index)
-app.use("/", authRoutes)
-app.use("/trips", trips)
+// app.get("/auth/facebook/callback", passport.authenticate("facebook", {
+//   successRedirect: "/",
+//   failureRedirect: "/new",
+// }));
+
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { successRedirect: '/trips',
+                                      failureRedirect: '/login' }));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
