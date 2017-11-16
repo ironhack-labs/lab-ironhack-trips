@@ -6,7 +6,7 @@ router.get('/', (req, res, next) => {
   res.render('index', { title: 'Express - Ironhack-trips' });
 });
 
-router.get('/signup',(req, res, next) => {
+router.get('/login',(req, res, next) => {
   res.render('facebook', { title: 'Express - Ironhack-trips' });
 });
 

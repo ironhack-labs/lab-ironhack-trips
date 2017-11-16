@@ -40,7 +40,7 @@ app.use(cookieParser());
 passport.use(new FbStrategy({
   clientID: "your Facebook client id here",
   clientSecret: "your Facebook client secret here",
-  callbackURL: "/signup"
+  callbackURL: "/login"
 }, (accessToken, refreshToken, profile, done) => {
   User.findOne({ facebookID: profile.id }, (err, user) => {
     if (err) {
