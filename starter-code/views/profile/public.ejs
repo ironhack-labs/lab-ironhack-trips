@@ -1,0 +1,8 @@
+<h1><%=trips[0].user_name%>'s Trips</h1>
+  <%trips.forEach(e => {%>
+    <h3><%=e.destination%></h3>
+    <p><%= e.description%></p>
+    <img src="<%=e.pic_path%>" height="200px"><br>
+  <%});%>
+
+<a href="/"><button>Go back</button></a>

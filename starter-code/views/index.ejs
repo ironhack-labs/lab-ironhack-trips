@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<h1>Trip Diary</h1>
+<p>Create a diary about your trips and share it with your friends to let them know your adventures</p>
+<a href="/auth/facebook"><button type='button'>Login with Facebook</button></a>
+
+<h2>All Trips in IronTrips!!</h2>
+<div class="trip-container">
+  <%if(trips.length > 0){%>
+    <%trips.forEach(e => {%>
+      <h3><%=e.destination%></h3>
+      <p><%= e.description%></p>
+      <img src="<%=e.pic_path%>" height="200px"><br>
+      <!-- Go to this user profile to see his/her trips -->
+      <a href="/my-trips/public/<%=e.user_id%>"><p>By: <%= e.user_name %></p></a>
+    <%});%>
+  <%}%>
+</div>
