@@ -7,7 +7,7 @@ const userSchema = new Schema({
   facebookID : String,
   facebookName : String
 } , {
-  timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 }
 );
 
