@@ -1,12 +1,14 @@
-const express        = require("express");
-const session        = require("express-session");
+const express = require("express");
+const session = require("express-session");
 const expressLayouts = require("express-ejs-layouts");
-const path           = require("path");
-const logger         = require("morgan");
-const cookieParser   = require("cookie-parser");
-const bodyParser     = require("body-parser");
-const mongoose       = require("mongoose");
-const app            = express();
+const path  = require("path");
+const logger = require("morgan");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const app = express();
+const passport = require('passport');
+const FbStrategy = require('passport-facebook').Strategy;
 
 // Controllers
 
@@ -33,8 +35,44 @@ app.use(session({
 }));
 app.use(cookieParser());
 
+passport.use(new FbStrategy({
+  clientID: "143216589654726",
+  clientSecret: "0233c3a01730a6ff32c233eefd9fdef6",
+  callbackURL: "/auth/facebook/callback"
+}, (accessToken, refreshToken, profile, done) => {
+  User.findOne({ provider_id: profile.id }, (err, user) => {
+    if (err) {
+      return done(err);
+    }
+    if (user) {
+      return done(null, user);
+    }
+
+    const newUser = new User({
+      provider_id: profile.id,
+      provider_name: user.displayName
+    });
+
+    newUser.save((err) => {
+      if (err) {
+        return done(err);
+      }
+      done(null, newUser);
+    });
+  });
+
+}));
+
 // Routes
 // app.use("/", index);
+app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { successRedirect: '/',
+                                      failureRedirect: '/login' }));
+
+app.get('/auth/facebook',
+passport.authenticate('facebook', { scope: 'read_stream' })
+);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
