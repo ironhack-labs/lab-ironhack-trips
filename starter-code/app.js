@@ -6,13 +6,26 @@ const logger         = require("morgan");
 const cookieParser   = require("cookie-parser");
 const bodyParser     = require("body-parser");
 const mongoose       = require("mongoose");
+const passport       = require("passport");
 const app            = express();
 
+// Not implemented yet, have to check
+// Environment variables config
+// require('dotenv').config();
+app.locals.title = 'Ironhack trips';
 // Controllers
+const index = require('./routes/index');
+const auth = require('./routes/auth');
+
+// Not implemented yet
+// const trips = require('./routes/trips');
 
 // Mongoose configuration
-mongoose.connect("mongodb://localhost/ironhack-trips");
-
+const dbURL = 'mongodb://localhost/ironhack-trips';
+// mongoose.connect("mongodb://localhost/ironhack-trips");
+mongoose.connect(dbURL, {useMongoClient:true}).then( () =>{
+  debug(`Connected to DB: ${dbURL}`);
+});
 // Middlewares configuration
 app.use(logger("dev"));
 
@@ -33,8 +46,17 @@ app.use(session({
 }));
 app.use(cookieParser());
 
+// Social login (Facebook) Important to be before initialize!
+require('./passport/facebook');
+require('./passport/serializers');
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Routes
-// app.use("/", index);
+app.use("/", index);
+app.use("/", auth);
+// app.use("/my-trips", trips);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
