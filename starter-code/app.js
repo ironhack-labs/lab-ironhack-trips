@@ -1,17 +1,18 @@
-const express        = require("express");
-const session        = require("express-session");
-const expressLayouts = require("express-ejs-layouts");
-const path           = require("path");
-const logger         = require("morgan");
-const cookieParser   = require("cookie-parser");
-const bodyParser     = require("body-parser");
-const mongoose       = require("mongoose");
-const app            = express();
-
-// Controllers
+const express        = require("express")
+const session        = require("express-session")
+const expressLayouts = require("express-ejs-layouts")
+const path           = require("path")
+const logger         = require("morgan")
+const cookieParser   = require("cookie-parser")
+const bodyParser     = require("body-parser")
+const mongoose       = require("mongoose")
+const app            = express()
+const authRoutes     = require('./routes/auth')
+const FbStrategy     = require('passport-facebook').Strategy
+const passport       = require('passport')
 
 // Mongoose configuration
-mongoose.connect("mongodb://localhost/ironhack-trips");
+mongoose.connect("mongodb://localhost/ironhack-trips", {useMongoClient: true});
 
 // Middlewares configuration
 app.use(logger("dev"));
@@ -33,10 +34,22 @@ app.use(session({
 }));
 app.use(cookieParser());
 
-// Routes
-// app.use("/", index);
+require('./passport/facebook');
+require('./passport/serializers');
 
-// catch 404 and forward to error handler
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Routes
+const index = require('./routes/index');
+const auth = require('./routes/auth');
+const trips = require('./routes/trips');
+
+app.use("/", index);
+app.use("/", auth);
+app.use("/my-trips", trips);
+
+//catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error("Not Found");
   err.status = 404;
