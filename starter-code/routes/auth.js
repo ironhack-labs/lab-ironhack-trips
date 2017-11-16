@@ -9,11 +9,7 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
-router.get("/auth/facebook", passport.authenticate("facebook"));
-router.get("/auth/facebook/callback", passport.authenticate("facebook", {
-  successRedirect: "/private-page",
-  failureRedirect: "/"
-}));
+
 
 
 module.exports = router;

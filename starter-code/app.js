@@ -71,7 +71,7 @@ app.get('/auth/facebook/callback',
                                       failureRedirect: '/login' }));
 
 app.get('/auth/facebook',
-passport.authenticate('facebook', { scope: 'read_stream' })
+  passport.authenticate('facebook', { scope: ['read_stream', 'publish_actions'] })
 );
 
 // catch 404 and forward to error handler
