@@ -9,7 +9,7 @@ const mongoose       = require("mongoose");
 const app            = express();
 
 // Controllers
-
+const index = require('./routes/index');
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/ironhack-trips");
 
@@ -19,8 +19,8 @@ app.use(logger("dev"));
 // View engine configuration
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-app.use(expressLayouts);
-app.set("layout", "layouts/main-layout");
+// app.use(expressLayouts);
+// app.set("layout", "layouts/main-layout");
 app.use(express.static(path.join(__dirname, "public")));
 
 // Access POST params with body parser
