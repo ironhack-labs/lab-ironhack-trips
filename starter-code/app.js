@@ -1,15 +1,19 @@
-const express        = require("express");
-const session        = require("express-session");
+const express = require("express");
+const session = require("express-session");
 const expressLayouts = require("express-ejs-layouts");
-const path           = require("path");
-const logger         = require("morgan");
-const cookieParser   = require("cookie-parser");
-const bodyParser     = require("body-parser");
-const mongoose       = require("mongoose");
-const app            = express();
+const path = require("path");
+const logger = require("morgan");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const app = express();
+const User = require('./models/user')
+const FbStrategy = require('passport-facebook').Strategy;
+const passport = require('passport');
 
-// Controllers
-
+const index = require('./routes/index');
+const auth = require('./routes/auth');
+const authGoogle = require('./routes/authGoogle')
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/ironhack-trips");
 
@@ -25,7 +29,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Access POST params with body parser
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 // Authentication
 app.use(session({
@@ -34,7 +40,42 @@ app.use(session({
 app.use(cookieParser());
 
 // Routes
-// app.use("/", index);
+app.use("/", index);
+app.use("/", auth);
+app.use("/", authGoogle);
+
+//
+
+
+passport.use(new FbStrategy({
+  clientID: "1739083036132979",
+  clientSecret: "your Facebook client secret here",
+  callbackURL: "/login"
+}, (accessToken, refreshToken, profile, done) => {
+  User.findOne({ facebookID: profile.id }, (err, user) => {
+    if (err) {
+      return done(err);
+    }
+    if (user) {
+      return done(null, user);
+    }
+
+    const newUser = new User({
+      facebookID: profile.id
+    });
+
+    newUser.save((err) => {
+      if (err) {
+        return done(err);
+      }
+      done(null, newUser);
+    });
+  });
+
+}));
+
+
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -53,5 +94,7 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render("error");
 });
+
+
 
 module.exports = app;
