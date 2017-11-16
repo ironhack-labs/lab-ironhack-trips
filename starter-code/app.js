@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 const app = express();
 const passport = require('passport');
 const FbStrategy = require('passport-facebook').Strategy;
+// const User = require("./models/User");
 
 // Controllers
 
@@ -70,9 +71,9 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/',
                                       failureRedirect: '/login' }));
 
-app.get('/auth/facebook',
-  passport.authenticate('facebook', { scope: ['read_stream', 'publish_actions'] })
-);
+// app.get('/auth/facebook',
+//   passport.authenticate('facebook', { scope: ['read_stream', 'publish_actions'] })
+// );
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
