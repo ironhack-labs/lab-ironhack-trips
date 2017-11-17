@@ -8,7 +8,7 @@ router.get("/logout", (req, res) => {
 
 router.get("/auth/facebook", passport.authenticate("facebook"));
 router.get("/auth/facebook/callback", passport.authenticate("facebook", {
-  successRedirect: "/my-trips",
+  successReturnToOrRedirect: "/my-trips",
   failureRedirect: "/"
 }));
 
