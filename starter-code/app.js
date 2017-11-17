@@ -1,17 +1,19 @@
-const express        = require("express");
-const session        = require("express-session");
+const express = require("express");
+const session = require("express-session");
+const passport = require("passport");
 const expressLayouts = require("express-ejs-layouts");
-const path           = require("path");
-const logger         = require("morgan");
-const cookieParser   = require("cookie-parser");
-const bodyParser     = require("body-parser");
-const mongoose       = require("mongoose");
-const app            = express();
+const path = require("path");
+const logger = require("morgan");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const app = express();
 
 // Controllers
 
 // Mongoose configuration
-mongoose.connect("mongodb://localhost/ironhack-trips");
+const mongoose = require("mongoose");
+const databaseURL = "mongodb://localhost/ironhack-trips";
+mongoose.connect(databaseURL, {useMongoClient: true}, () => debug(`Connected to db: ${databaseURL}`));
 
 // Middlewares configuration
 app.use(logger("dev"));
@@ -32,6 +34,10 @@ app.use(session({
   secret: "ironhack trips"
 }));
 app.use(cookieParser());
+
+// Passport configuration
+require('./config/passport');
+require('./config/passport-facebook');
 
 // Routes
 // app.use("/", index);
