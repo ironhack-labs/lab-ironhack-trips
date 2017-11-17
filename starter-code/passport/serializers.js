@@ -1,4 +1,5 @@
 const passport = require("passport");
+const path = require('path');
 const User = require('../models/User');
 
 passport.serializeUser((user, cb) => {
