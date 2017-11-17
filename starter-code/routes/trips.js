@@ -3,6 +3,7 @@ const multer = require('multer')
 const upload = multer({ dest: './public/uploads/' })
 const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login')
 const Trip = require('../models/Trips')
+const User = require('../models/User')
 
 /* GET home page. */
 trips.get('/', (req, res, next) => {

@@ -115,14 +115,6 @@ passport.use(new LocalStrategy((username, password, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/auth/facebook'", passport.authenticate("facebook"));
-
-// app.get("/auth/facebook/callback", passport.authenticate("facebook", {
-//   successRedirect: "/",
-//   failureRedirect: "/new",
-// }));
-
-
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/trips',
