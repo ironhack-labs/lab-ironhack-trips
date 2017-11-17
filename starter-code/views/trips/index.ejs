@@ -1,0 +1,18 @@
+<h1 class="text-center">My trips</h1>
+<% if (trips.length > 0) { %>
+<div class="grid-container fluid">
+  <div class="grid-x grid-padding-x align-center" style="height: 100vh">
+    <% trips.forEach((trip) => { %>
+      <div class="cell medium-2">
+        <% include trip-card.ejs %>
+        <p class="text-right">
+          <small>
+            <a href="/my-trips/edit/<%= trip.id %>">Edit</a> |
+            <a href="/my-trips/delete/<%= trip.id %>">Delete</a>
+          </small>
+        </p>
+      </div>
+    <% }) %>
+  </div>
+</div>
+<% }%>

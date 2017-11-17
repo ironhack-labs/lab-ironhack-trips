@@ -1,0 +1,17 @@
+<% if (typeof(user) !== "undefined"){ %>
+  <nav class="top-bar">
+  <div class="top-bar-left">
+    <ul class="menu">
+      <li><a href="/my-trips">My trips</a></li>
+      <li><a href="/my-trips/new">New trip</a></li>
+      <li><a href="/profile">My profile</a></li>
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    <ul class="menu">
+      <li class="menu-text"><small>Logged in as <%= user.provider_name %></small> </li>
+      <li><a href="/logout" class="small secondary button">Log out</a></li>
+    </ul>
+  </div>
+</nav>
+<% } %>

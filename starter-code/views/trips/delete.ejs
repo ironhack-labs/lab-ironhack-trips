@@ -1,0 +1,8 @@
+<div class="grid-x align-middle" style="height:100vh">
+  <div class="cell large-8 text-center">
+    <form class="delete-form" action="/my-trips/delete/<%= trip.id %>" method="post">
+      <p class="lead">Are you sure you want to delete your trip <%= trip.destination %></p>
+      <p><button class="button large" type="submit">YES</button> <a href="/my-trips" class="secondary button large">NO</a></p>
+    </form>
+  </div>
+</div>

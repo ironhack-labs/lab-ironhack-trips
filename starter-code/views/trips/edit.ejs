@@ -1,0 +1,22 @@
+<h1 class="text-center">Edit trip to <%= trip.destination %></h1>
+<div class="grid-container">
+  <div class="grid-x align-center">
+    <div class="cell medium-3">
+      <form action="/my-trips/edit/<%= trip.id %>" method="post" enctype="multipart/form-data">
+        <label class="h5">Destination
+          <input type="text" name="destination" value="<%= trip.destination %>">
+        </label>
+        <label class="h5">Description
+          <textarea name="description" rows="8"><%= trip.description %></textarea>
+        </label>
+        <div class="float-left">
+          <label for="fileUpload" class=" secondary button">Select new picture</label>
+          <input type="file" id="fileUpload" name="picture" class="show-for-sr">
+        </div>
+        <p class="text-right">
+          <button type="submit" class="button">Update trip</button>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
