@@ -1,0 +1,13 @@
+<h1>My Trips</h1>
+
+<a href="/my-trips/new"><button>New</button></a>
+
+<%if (trips.length>0){%>
+<%trips.forEach(e => {%>
+<h3><%=e.destination%></h3>
+<p><%=e.description%></p>
+<img src="<%=e.pic_path%>" height="200">
+<br>
+<a href="/my-trips/edit/<%=e._id%>"><button>Edit</button></a>
+<%});%>
+<%}%>

@@ -1,0 +1,12 @@
+<h1>Edit a Trip!</h1>
+
+<form action="/my-trips/edit/<%=trip._id%>" method="post" enctype="multipart/form-data">
+  <label for="destination">Destination</label>
+  <input type="text" name="destination" value="<%=trip.destination%>">
+  <br>
+  <label for="description">Description</label>
+  <input type="text" name="description" value="<%=trip.description%>">
+  <br>
+  <input type="file" name="photo">
+  <button>Submit</button>
+</form>
