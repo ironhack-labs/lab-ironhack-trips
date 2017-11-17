@@ -1,0 +1,22 @@
+<h1 class="text-center">New trip</h1>
+<div class="grid-container">
+  <div class="grid-x align-center">
+    <div class="cell medium-3">
+      <form action="/my-trips/new" method="post" enctype="multipart/form-data">
+        <label class="h5">Destination
+          <input type="text" name="destination">
+        </label>
+        <label class="h5">Description
+          <textarea name="description" rows="6"></textarea>
+        </label>
+        <div class="float-left">
+          <label for="fileUpload" class=" secondary button">Upload Picture</label>
+          <input type="file" id="fileUpload" name="picture" class="show-for-sr">
+        </div>
+        <p class="text-right">
+          <button type="submit" class="button">Create new trip</button>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

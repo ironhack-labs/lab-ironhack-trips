@@ -1,9 +1,17 @@
 const passport = require("passport");
 const router = require("express").Router();
+const {
+  ensureLoggedIn,
+  ensureLoggedOut
+} = require('connect-ensure-login');
 
-router.get("/logout", (req, res) => {
+router.get("/login", (req, res) => {
+  res.redirect("/");
+});
+
+router.get("/logout", ensureLoggedIn('/login'), (req, res) => {
   req.logout();
-  res.redirect("/auth/login");
+  res.redirect("/");
 });
 
 router.get("/auth/facebook", passport.authenticate("facebook"));
