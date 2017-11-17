@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+  <p>Welcome to
+    <%= title %>
+  </p>
+  <ul>
+    <li>
+      <img src="#{user.photo}">
+    </li>
+    <li>
+      <!-- <p>Bienvenido #{user.name}</p> -->
+    </li>
+    <li>
+      <a href="logout">Salir</a>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <a href="auth/facebook">Login con Facebook</a>
+    </li>
+  </ul>
+</body>
+
 </html>
