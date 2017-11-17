@@ -1,0 +1,8 @@
+<h2>Upload your photo</h2>
+<form action="/trip/:id" method="post" enctype="multipart/form-data">
+  <input type="text" value="<%= viaje.destination %>">
+  <input type="text" value="<%= viaje.description %>"> 
+
+  <input type="file" name="photo">
+  <input type="submit" value="Save">
+</form>

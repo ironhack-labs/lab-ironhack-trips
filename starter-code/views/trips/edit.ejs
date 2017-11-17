@@ -1,0 +1,12 @@
+<form action="/trip/<%= viaje._id %>" method="POST">
+  <label for="user_name">Username</label>
+  <input type="text" id="name" name="user_name" placeholder="<%= viaje.user_name %>">
+
+  <label for="destination">Adress</label>
+  <input type="text" name="destination" id="destination" placeholder="<%= viaje.destination %>">
+
+  <label for="description">Description</label>
+  <input type="text" name="description" placeholder="<%= viaje.destination %>">
+
+  <button type="submit">Add place</button>
+</form>
