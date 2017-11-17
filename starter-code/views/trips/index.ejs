@@ -1,1 +1,15 @@
 <h1>Welcome to My Trips</h1>
+
+<% if (trips.length !== 0) { %>
+  <ul>
+    <% trips.forEach(trip => { %>
+      <li><% trip.user_name %> - <% trip.destination %></li>
+      <a href="my-trips/edit/<%= trip._id %>">Edit</a>
+      <a href="my-trips/delete/<%= trip._id %>">Delete</a>
+    <% }); %>
+  </ul>
+<% } else { %>
+  <p>Oh my God! You do not have any trip yet</p>
+  <p>You should travel more</p>
+<% } %>
+<a href="/my-trips/new">Add new trip</a>

@@ -1,0 +1,18 @@
+<section>
+  <h2>Create new trip</h2>
+  <form id="new-trip" action="/my-trips/new" method="post" enctype="multipart/form-data">
+    <label for="user_name">Username</label><br>
+    <input type="text" id="user_name" name="user_name">
+    <br><br>
+    <label for="destination">Destination</label><br>
+    <input type="text" id="destination" name="destination">
+    <br><br>
+    <label for="description">Description</label><br>
+    <textarea form="new-trip" "description"></textarea>
+    <br><br>
+    <label for="photo">Photo</label><br>
+    <input type="file" id="photo" name="photo">
+    <br><br>
+    <button type="submit">Save</button>
+  </form>
+</section>
