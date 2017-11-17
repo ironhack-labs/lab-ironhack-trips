@@ -7,6 +7,7 @@ const cookieParser   = require("cookie-parser");
 const bodyParser     = require("body-parser");
 const mongoose       = require("mongoose");
 const app            = express();
+const passport = require("passport");
 
 // Controllers
 const index = require('./routes/index');
