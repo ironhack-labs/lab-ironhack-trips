@@ -1,0 +1,14 @@
+<h1>Welcome back</h1>
+<h2>My trips:</h2>
+<ul>
+<% viajes.forEach((e) => { %>
+      <li>Destination: <%= e.destination %></li>
+      <a href="/trip/<%= e._id %>">See</a>
+      <a href="/trip/<%= e._id %>/edit">Edit</a>
+      <form action="/trip/<%= e._id %>/delete" method="POST">
+      <button type="submit">Delete</button>
+      </form>
+      <br>
+    <%})%>
+  </ul>
+<a href="/trip/new">Add new place</a>
