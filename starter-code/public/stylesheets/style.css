@@ -1,8 +1,42 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url('http://static.panoramio.com/photos/large/126172545.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
 }
 
 a {
-  color: #00B7FF;
+  Color: #FFFFFF;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+button {
+  background-color: #33B4F5;
+  width: 200px;
+  height: 50px;
+  border: 3px solid white;
+  border-radius: 15px;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+input {
+  height: 30px;
+  width: 500px;
+}
+
+label {
+  font-size: 20px;
+}
+
+#login {
+  text-align: center;
+  margin-top: 200px;
+  font-size: 40px;
+  width:60%;
 }

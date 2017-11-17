@@ -1,0 +1,17 @@
+<h2>Welcome to your trips diary!</h2>
+
+<%if(trips.length > 0){%>
+  <%trips.forEach(trip => {%>
+    <h3><%=trip.destination%></h3>
+    <p><%= trip.description%></p>
+    <img src="<%=trip.pic_path%>" height="200px"><br>
+    <a href="/trips/edit/<%=trip._id%>"><button>Edit</button></a>
+    <a href="/trips/delete/<%=trip._id%>"><button>Delete</button></a>
+  <%});%>
+<%}%>
+
+<br><br><a href="/trips/new"><button>New Trip!</button></a><br><br>
+
+<form action="/auth/logout" method="post">
+  <button>Logout</button>
+</form>
