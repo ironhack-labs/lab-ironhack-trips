@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-offset-3 col-sm-6">
+      <form action="/trips" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" name="username" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="destination">Destination</label>
+          <input type="text" name="destination" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" name="description" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="file" name="photo">
+        </div>
+        <button type="submit" class="btn btn-primary">Add trip</button>
+      </form>
+    </div>
+  </div>
+</div>
