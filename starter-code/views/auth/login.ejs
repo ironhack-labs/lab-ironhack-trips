@@ -1,0 +1,9 @@
+<h2>Trip diary</h2>
+<p> Create a diary about your trips and share it with your friends to let them know your adventures</p>
+<% if(!user){ %>
+  <ul>
+    <li><a href="/authFacebook">Login Whith Facebook</a></li>
+  </ul>
+<% }else{%>
+  <a href="/privateTrip"> Go to private Page</a>
+  <%}%>
