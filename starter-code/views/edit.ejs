@@ -1,0 +1,16 @@
+<h1>Editar trip a <%= trip.destination %> - <%= trip.id %></h1>
+<form style="display:flex;flex-direction:column;align-items:flex-start;" method="post" action="/my-trips/edit">
+    <input name="_id" type="hidden" value="<%= trip._id %>">
+    <label>Destination
+        <input value="<%= trip.destination %>" type="text" name="destination">
+    </label>
+    <label>Description
+        <textarea name="description" cols="30" rows="10"><%= trip.description %></textarea>
+    </label>
+    <label>Image
+        <input type="file" name="pic_path">
+    </label>
+    <input type="submit">
+</form>
+
+<a href="/my-trips/delete/<%= trip._id %>" style="background:red">Borrar</a>

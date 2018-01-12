@@ -1,0 +1,6 @@
+<h1>Viajes de <%= user.provider_name %></h1>
+<ul>
+    <% trips.forEach(function(trip) { %>
+            <li><%= trip._id %> - <%= trip.destination %></li>
+    <% }); %>
+</ul>

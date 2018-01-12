@@ -1,0 +1,9 @@
+<h1>Usuarios publicos</h1>
+<ul>
+    <% users.forEach(function(user) { %>
+        <a href="/user-trips/<%= user._id %>">
+            <li><%= user._id %> - <%= user.provider_name %></li>
+        </a>
+        
+    <% }); %>
+</ul>
