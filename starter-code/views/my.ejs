@@ -1,0 +1,9 @@
+<h1>Mis viajes</h1>
+<a href="/my-trips/new">Agregar nuevo</a>
+<ul>
+    <% trips.forEach(function(trip) { %>
+        <a href="/my-trips/edit/<%= trip._id %>" >
+            <li><%= trip._id %> - <%= trip.destination %></li>
+        </a>
+    <% }); %>
+</ul>

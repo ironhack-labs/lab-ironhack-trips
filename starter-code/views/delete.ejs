@@ -1,0 +1,7 @@
+<h1>Estas bien pinche seguro de borrar:</h1>
+<h2><%= trip.name %></h2>
+<form method="post" action="/my-trips/delete">
+    <input type="hidden" name="_id" value="<%= trip._id %>">
+    <input type="submit" value="Simón">
+</form>
+<a href="/my-trips">Cancelar</a>
