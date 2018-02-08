@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3 centered-form">
+        <form action="/createtrip" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="title">Username</label>
+            <input type="text" name="user_name" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="destination">Destination</label>
+            <input type="text" name="destination" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="deadline">Picpath</label>
+            <input type="file" name="picpath" class="form-control">
+          </div>
+          <div class="form-group">
+            <button type="submit">Create Campaign</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
