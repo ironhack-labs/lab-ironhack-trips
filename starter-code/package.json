@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "dev": "nodemon --inspect .bin/www"
   },
   "dependencies": {
     "body-parser": "~1.15.2",
+    "connect-ensure-login": "^0.1.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "ejs": "~2.5.2",
