@@ -1,13 +1,14 @@
-const express        = require("express");
-const session        = require("express-session");
+const express = require("express");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 const expressLayouts = require("express-ejs-layouts");
-const path           = require("path");
-const logger         = require("morgan");
-const cookieParser   = require("cookie-parser");
-const bodyParser     = require("body-parser");
-const mongoose       = require("mongoose");
-const app            = express();
-
+const path = require("path");
+const logger = require("morgan");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const app = express();
+const passportConfig = require('./passport')
 // Controllers
 
 // Mongoose configuration
@@ -28,13 +29,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Authentication
-app.use(session({
-  secret: "ironhack trips"
-}));
+app.use(
+  session({
+    secret: "ironhack trips",
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+      ttl: 24 * 60 * 60 // 1 day
+    })
+  })
+);
 app.use(cookieParser());
+passportConfig(app);
 
 // Routes
-// app.use("/", index);
+const index = require("./routes/index");
+const auth = require("./routes/auth");
+app.use("/", index);
+app.use("/", auth);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
