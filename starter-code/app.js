@@ -9,7 +9,8 @@ const mongoose       = require("mongoose");
 const app            = express();
 
 // Controllers
-
+const index = require('./routes/index');
+const login =require('./routes/login')
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/ironhack-trips");
 
@@ -34,7 +35,9 @@ app.use(session({
 app.use(cookieParser());
 
 // Routes
-// app.use("/", index);
+ app.use("/", index);
+//  app.use("auth/login", index);
+app.use('/login', login)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
