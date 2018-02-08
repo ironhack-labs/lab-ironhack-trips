@@ -1,0 +1,26 @@
+<h1>my trips</h1>
+<a class="btn btn-primary" href="/createatrip">Create a trip</a>
+<div class="campaign-row row">
+    <h5 class="text-center">You may be interested in...</h5>
+    <% trips.forEach((t) => { %>
+        <div class="col-sm-3 home-campaign-box">
+            <img src="/uploads/<%= t.pic_path %>">
+            <div class="campaign-info-wrapper">
+                    <strong>
+                        <%= t.destination %>
+                    </strong>
+                </a>
+                <br> by
+                <span class="light-text">
+                    <%= t.username %>
+                </span>
+                <br>
+                <span class="light-text description">
+                    <%= t.description %>
+                </span>
+            </div>
+        </div>
+        <%  }) %>
+            </div>
+            <br>
+            <a href="/logout">Log out</a>
