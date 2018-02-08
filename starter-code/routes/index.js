@@ -6,7 +6,7 @@ const User = require("../models/User");
 router.get("/", (req, res, next) => {
   res.render("index");
 });
-router.get("/home", (req, res, next) => {
-  res.render("home");
+router.get("/my-trips", (req, res, next) => {
+  res.render("trips/my-trips");
 });
 module.exports = router
