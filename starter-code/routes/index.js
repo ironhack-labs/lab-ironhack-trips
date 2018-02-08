@@ -1,8 +1,9 @@
 const express = require("express");
-const index = express.Router();
+const router = express.Router();
 
-index.get("/", (req, res, next) => {
-  res.render("index");
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Facebook' });
+  
 });
 
-module.exports = index;
+module.exports = router;
