@@ -1,11 +1,13 @@
-const express = require("express");
-const router = express.Router();
-const passport = require('passport')
+const mongoose = require("mongoose");
+const Schema   = mongoose.Schema;
 
-router.get("/auth/facebook", passport.authenticate("facebook"));
-router.get("/auth/facebook/callback", passport.authenticate("facebook", {
-  successRedirect: "/my-trips",
-  failureRedirect: "/"
-}));
+const userSchema = new Schema({
+    provider_id: String,
+    provider_name: String
+}, {
+  timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
+});
 
-module.exports = router
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;
