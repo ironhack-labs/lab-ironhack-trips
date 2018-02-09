@@ -11,7 +11,7 @@ const app            = express();
 // Controllers
 
 // Mongoose configuration
-mongoose.connect("mongodb://localhost/ironhack-trips");
+mongoose.connect("mongodb://localhost/ironhack-trips", {useMongoClient: true});
 
 // Middlewares configuration
 app.use(logger("dev"));
