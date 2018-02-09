@@ -1,14 +1,16 @@
-const express        = require("express");
-const session        = require("express-session");
+const express = require("express");
+const session = require("express-session");
 const expressLayouts = require("express-ejs-layouts");
-const path           = require("path");
-const logger         = require("morgan");
-const cookieParser   = require("cookie-parser");
-const bodyParser     = require("body-parser");
-const mongoose       = require("mongoose");
-const app            = express();
+const path = require("path");
+const logger = require("morgan");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const app = express();
 
 // Controllers
+const index = require("./routes/index");
+const authController = require("./routes/authController");
 
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/ironhack-trips");
@@ -34,7 +36,8 @@ app.use(session({
 app.use(cookieParser());
 
 // Routes
-// app.use("/", index);
+app.use("/", index);
+app.use('/', authController);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
