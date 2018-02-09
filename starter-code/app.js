@@ -7,8 +7,12 @@ const cookieParser   = require("cookie-parser");
 const bodyParser     = require("body-parser");
 const mongoose       = require("mongoose");
 const app            = express();
+const MongoStore = require("connect-mongo")(session);
+const passportConfig = require('./passport')
 
 // Controllers
+const index = require('./routes/index');
+const auth = require('./routes/auth');
 
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/ironhack-trips");
@@ -19,9 +23,31 @@ app.use(logger("dev"));
 // View engine configuration
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-app.use(expressLayouts);
-app.set("layout", "layouts/main-layout");
-app.use(express.static(path.join(__dirname, "public")));
+
+app.use(logger('dev'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(session({
+  secret: "our-passport-local-strategy-app",
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
+passportConfig(app);
+
+app.use((req,res,next) => {
+  res.locals.user = req.user;
+  res.locals.title = 'Passport Auth 0118';
+  next();
+}) 
+
+app.use('/', index);
+app.use('/auth', auth);
 
 // Access POST params with body parser
 app.use(bodyParser.json());
