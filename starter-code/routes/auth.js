@@ -5,7 +5,7 @@ const User = require("../models/User");
 
 authRoutes.get("/", passport.authenticate("facebook"));
 authRoutes.get("/callback", passport.authenticate("facebook", {
-  successRedirect: "/my-trips",
+  successRedirect: "/",
   failureRedirect: "/"
 }));
 

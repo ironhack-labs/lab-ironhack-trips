@@ -9,24 +9,18 @@ passport.use(new FbStrategy({
   clientSecret: fb_app_secret,
   callbackURL: "/facebook/callback"
 }, (accessToken, refreshToken, profile, done) => {
-  console.log(profile)
-  User.findOne({
-    facebookID: profile.id
-  }, (err, user) => {
+  console.log(profile);
+  User.findOne({ provider_id: profile.id }, (err, user) => {
     if (err) {
       return done(err);
     }
     if (user) {
-      User.findByIdAndUpdate(user._id, {
-        username: profile.displayName
-      }).then(usernew => {
-        return done(null, usernew);
-      })
+      return done(null, user);
     }
 
     const newUser = new User({
-      facebookID: profile.id,
-      username: profile.displayName
+      provider_id: profile.id,
+      provider_name: profile.displayName
     });
 
     newUser.save((err) => {

@@ -1,0 +1,32 @@
+<p>new course</p>
+<form id="form" action="/new-course" method="POST" enctype="multipart/form-data"> 
+    <div class="form-group">
+        <label for="name">
+            <small>Destination</small>
+        </label>
+        <br>
+        <input class="form-control" type="text" name="destination" placeholder="destination"> </div>
+    <div class="form-group">
+        <label for="startingDate">
+            <small>Description</small>
+        </label>
+        <br>
+        <input class="form-control" type="date" name="description" placeholder="description"> </div>
+    <div class="form-group">
+        <label for="endDate">
+            <small>Image</small>
+        </label>
+        <br>
+        <input class="form-control" type="file" name="pic"> 
+    </div>
+        <br>
+        <button class="btn btn-success">
+            <small>Create course</small>
+        </button>
+</form>
+<a href="/">
+    <small>go home</small>
+</a><br>
+<a href="/courses">
+    <small>all courses</small>
+</a><br>
