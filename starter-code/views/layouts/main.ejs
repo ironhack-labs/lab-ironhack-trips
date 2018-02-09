@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,9 +8,9 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <p>I'M THE HOME!</p>
-    <form action="/logout" method="POST">
-    <button>Logout</button>
-  </form>
+
+    <button class="btn" href="/auth/fb">Login con facebook</button>
+
+    <%- body %>
   </body>
 </html>
