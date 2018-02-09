@@ -15,7 +15,7 @@
     "express-ejs-layouts": "^2.2.0",
     "express-session": "^1.15.0",
     "mongodb": "^2.2.22",
-    "mongoose": "^4.7.8",
+    "mongoose": "^5.0.4",
     "morgan": "~1.7.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1"

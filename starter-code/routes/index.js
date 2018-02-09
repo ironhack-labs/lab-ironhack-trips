@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const isLoggedIn = require("../middlewares/isLoggedIn");
+const isLoggedIn = require("../middlewares/loggedIn");
 const onlyMe = require("../middlewares/onlyMe");
 
 /* GET home page. */
