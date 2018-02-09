@@ -9,7 +9,10 @@ passport.use(new FbStrategy({
     clientSecret: fb_app_secret,
     callbackURL: "/auth/facebook/callback"
   }, (accessToken, refreshToken, profile, done) => {
-    User.findOne({ facebookID: profile.id }, (err, user) => {
+    User.findOne({ provider_id: profile.id }, (err, user) => {
+      console.log(profile.id)
+      console.log(user)
+      console.log(user._id)
       if (err) {
         return done(err);
       }
@@ -17,21 +20,25 @@ passport.use(new FbStrategy({
           User.findByIdAndUpdate(user._id,{
             username: profile.displayName
           }).then(usernew => {
+            console.log("updating")
             return done(null, usernew);
           })
+      } else{
+        console.log(profile.id)
+        console.log(profile.displayName)
+        const newUser = new User({
+          provider_id: profile.id,
+          provider_name: profile.displayName
+        });
+    
+        newUser.save((err) => {
+          console.log("saving new")
+          if (err) {
+            return done(err);
+          }
+          done(null, newUser);
+        });
       }
-  
-      const newUser = new User({
-        provider_id: profile.id,
-        provider_name: profile.displayName
-      });
-  
-      newUser.save((err) => {
-        if (err) {
-          return done(err);
-        }
-        done(null, newUser);
-      });
     });
   
   }));
