@@ -9,7 +9,8 @@ const mongoose       = require("mongoose");
 const app            = express();
 
 // Controllers
-
+const index= require("./routes/index.js")
+const login = require("./routes/login.js")
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/ironhack-trips");
 
@@ -19,9 +20,9 @@ app.use(logger("dev"));
 // View engine configuration
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-app.use(expressLayouts);
-app.set("layout", "layouts/main-layout");
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(expressLayouts);
+// // app.set("layout", "layouts/main-layout");
+// app.use(express.static(path.join(__dirname, "public")));
 
 // Access POST params with body parser
 app.use(bodyParser.json());
@@ -34,7 +35,8 @@ app.use(session({
 app.use(cookieParser());
 
 // Routes
-// app.use("/", index);
+app.use("/", index);
+app.use("/login", login)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
