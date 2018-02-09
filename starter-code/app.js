@@ -1,17 +1,24 @@
-const express        = require("express");
-const session        = require("express-session");
+const express = require("express");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 const expressLayouts = require("express-ejs-layouts");
-const path           = require("path");
-const logger         = require("morgan");
-const cookieParser   = require("cookie-parser");
-const bodyParser     = require("body-parser");
-const mongoose       = require("mongoose");
-const app            = express();
+const path = require("path");
+const logger = require("morgan");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const debug = require("debug")(
+  `ironhack-trips:${path.basename(__filename).split(".")[0]}`
+);
+const app = express();
+const { dbURL } = require("./config");
 
 // Controllers
 
 // Mongoose configuration
-mongoose.connect("mongodb://localhost/ironhack-trips");
+mongoose.connect("mongodb://localhost/ironhack-trips", {
+  useMongoClient: true
+});
 
 // Middlewares configuration
 app.use(logger("dev"));
@@ -28,9 +35,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Authentication
-app.use(session({
-  secret: "ironhack trips"
-}));
+app.use(
+  session({
+    secret: "ironhack trips"
+  })
+);
 app.use(cookieParser());
 
 // Routes
