@@ -1,12 +1,18 @@
-const express        = require("express");
-const session        = require("express-session");
+const express = require("express");
+const session = require("express-session");
+const MongoStore = require('connect-mongo')(session);
 const expressLayouts = require("express-ejs-layouts");
-const path           = require("path");
-const logger         = require("morgan");
-const cookieParser   = require("cookie-parser");
-const bodyParser     = require("body-parser");
-const mongoose       = require("mongoose");
-const app            = express();
+const path = require("path");
+const logger = require("morgan");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const debug = require("debug")("ironhack-trips:app");
+const passportConfig = require('./passport')
+const flash = require('connect-flash');
+const index = require('./routes/index');
+const auth = require('./routes/auth');
+const app = express();
 
 // Controllers
 
@@ -26,15 +32,32 @@ app.use(express.static(path.join(__dirname, "public")));
 // Access POST params with body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-// Authentication
-app.use(session({
-  secret: "ironhack trips"
-}));
 app.use(cookieParser());
 
-// Routes
-// app.use("/", index);
+// Authentication
+app.use(
+  session({
+    secret: "ironhack trips",
+    resave: false,
+    saveUninitialized: true,
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+      ttl: 24 * 60 * 60 // 1 day
+    })
+  })
+);
+
+passportConfig(app);
+
+app.use((req,res,next)=>{
+  res.locals.title = "Ironhack Trips";
+  res.locals.user = req.user;
+  // res.locals.messages = req.flash('info');
+  next();
+}) 
+
+app.use('/', index);
+app.use('/auth', auth);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
