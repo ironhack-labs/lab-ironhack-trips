@@ -20,14 +20,14 @@ const ensureLoggedIn = redirectTo => {
 router.get("/new", ensureLoggedIn("/"), (req, res, next) => {
   res.render("trips/new");
 });
-router.post("/new", [ensureLoggedIn("/auth/login"), upload.single("image")], (req, res, next) => {
+
+router.post("/new", [ensureLoggedIn("/auth/login") , upload.single('picture')], (req, res, next) => {
     const user_id = req.user._id;
-    console.log(user_id)
-    const { destination, description } = req.body;
-    User.findById(user_id)
-      .populate("provider_name")
-      .then((err, user) => {
-        console.log(user)
+    const destination = req.body.destination;
+    const description = req.body.description;
+    
+    User.findById(user_id,(err, user) => {
+        console.log(req.picture)
         const newTrip = new Trip({
           destination,
           description,
@@ -35,7 +35,10 @@ router.post("/new", [ensureLoggedIn("/auth/login"), upload.single("image")], (re
           provider_name: user.provider_name,
           pic_path: req.file.filename
         });
-        console.log(newTrip)
+
+       
+        console.log(newTrip._id)
+
         newTrip.save().then(c => {
             res.redirect("/my-trips");
           })
