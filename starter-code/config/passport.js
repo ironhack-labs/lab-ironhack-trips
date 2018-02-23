@@ -20,9 +20,10 @@ passport.use(new FbStrategy({
     clientID: "1997223683651830",
     clientSecret: "05e264953f56ae523aad0f6cbb89f678",
     callbackURL: "/auth/facebook/callback"
-  },  (accessToken, refreshToken, profile, done)=>{
+  },  (accessToken, refreshToken, profile, email, done)=>{
     User.findOne({facebookID:profile.id}, (err,user)=>{
         console.log(profile);
+        
         if(err) return done(err);
         if(user) return done(null,user);
         const newUser = new User({
