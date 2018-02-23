@@ -1,0 +1,13 @@
+<div class="trip show" style="background-image: url(<%=trip.pic_path%>); background-repeat: no-repeat; background-size: 100% 100%"><h2 class="caption"><%=trip.destination%></h2></div>
+
+<p><%=trip.description%></p>
+<% if (logged){ %>
+
+    <a href=<%="/mytrips/"+trip._id+"/edit"%>><button class="button">Edit</button></a>
+
+    <a href=<%="/mytrips/"+trip._id+"/delete"%>><button class="button">Delete</button></a>
+    
+<%} %>
+
+
+<a href="/mytrips/"><button class="button">Return</button></a>

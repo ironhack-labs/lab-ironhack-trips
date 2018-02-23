@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<h1 class="title">My Trip Diary</h1>
+
+<a href="/mytrips/new"><button class="button">Add a new trip!</button></a>
+<div class="container">
+<% for (var i=0; i<trips.length; i++){ %>
+    <div class="trip" style="background-image: url(<%=trips[i].pic_path%>); background-repeat: no-repeat; background-size: 100% 100%"><a href=<%="/mytrips/"+trips[i]._id %>><h2 class="caption"><%=trips[i].destination%></h2></a></div>
+<% } %>
+</div>
+
+
+<a href="/ourtrips"><button class="button">Everyone's trips</button></a>

@@ -1,0 +1,7 @@
+<h1 class="title">Ironhack Trips</h1>
+
+<div class="container">
+<% for (var i=0; i<trips.length; i++){ %>
+    <div class="trip" style="background-image: url(<%=trips[i].pic_path%>); background-repeat: no-repeat; background-size: 100% 100%"><a href=<%="/ourtrips/"+trips[i]._id %>><h2 class="caption"><%=trips[i].destination%></h2></a></div>
+<% } %>
+</div>
