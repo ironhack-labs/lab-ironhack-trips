@@ -9,7 +9,7 @@ const userSchema = new Schema(
         //social login con passport
         facebookID: String,
         displayName: String,
-        email: String,
+   
 
     },
     {

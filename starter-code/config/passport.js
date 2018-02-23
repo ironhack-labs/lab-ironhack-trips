@@ -19,7 +19,8 @@ module.exports = function (app) {
 passport.use(new FbStrategy({
     clientID: "1997223683651830",
     clientSecret: "05e264953f56ae523aad0f6cbb89f678",
-    callbackURL: "/auth/facebook/callback"
+    callbackURL: "/auth/facebook/callback",
+    profileFields: ['email', "displayName"]
   },  (accessToken, refreshToken, profile, email, done)=>{
     User.findOne({facebookID:profile.id}, (err,user)=>{
         console.log(profile);
