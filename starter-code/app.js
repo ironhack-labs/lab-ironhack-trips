@@ -7,6 +7,9 @@ const cookieParser   = require("cookie-parser");
 const bodyParser     = require("body-parser");
 const mongoose       = require("mongoose");
 const app            = express();
+const index   =require ("./routes/index");
+const auth  =require ("./routes/auth");
+const trips  =require ("./routes/my-trips");
 
 // Controllers
 
@@ -29,12 +32,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Authentication
 app.use(session({
-  secret: "ironhack trips"
+  secret: "ironhack trips",
+  resave:true,
+  saveUnitialized:true
 }));
 app.use(cookieParser());
 
+// requerimos el passport de la carpeta config
+require ("./config/passport")(app)
+
 // Routes
-// app.use("/", index);
+app.use("/", index);
+app.use("/",auth);
+app.use("/my-trips",trips)
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

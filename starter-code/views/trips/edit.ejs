@@ -1,0 +1,30 @@
+
+            <form action="/my-trips/edit/<%= trip._id%>" method="post">
+              <div class="form-group">
+                <label for="title">Destination</label>
+                <input type="text" name="destination" class="form-control" value="<%= trip.destination %>">
+              </div>
+             
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  class="form-control">
+                  <%= trip.description %>
+                </textarea>
+              </div>
+              <div class="form-group">
+                <button type="submit">Update Trip</button>
+              </div>
+            </form>
+      
+      <% if (typeof(errors) !== 'undefined'){ %>
+        <div class="alert alert-danger">
+        <ul>
+          <% for (let error in errors){ %>
+            <li><%= errors[error].message %></li>
+          <% } %>
+        </ul>
+        </div>
+      <% } %>
