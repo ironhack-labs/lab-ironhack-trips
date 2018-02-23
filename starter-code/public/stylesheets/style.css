@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+input,textarea, button{
+  width: 400px;
+  min-height: 30px;
+}
+button{
+  line-height: 26px;
+}

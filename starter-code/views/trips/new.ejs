@@ -1,0 +1,19 @@
+<h1>New Trip</h1>
+<form id="form" action="/trips/new" method="POST">
+
+  <label for="destination">Destination</label><br>
+  <input id="destination" name="destination" type="text"></input><br>
+  <br>
+  <label for="description">Description</label><br>
+  <textarea id="description" name="description" rows="10" cols=""></textarea><br>
+  <br>
+  <label for="picture">Picture</label><br>
+  <input id="picture" name="picture" type="file"></input><br>
+  <br>
+  <% if (typeof(errorMessage) != "undefined") { %>
+    <div class="error-message"> <%= errorMessage %> </div>
+  <% } %>
+  <br>
+  <button type="submit">Save post</button>
+
+</form>
