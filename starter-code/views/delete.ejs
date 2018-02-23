@@ -1,0 +1,9 @@
+<div class="trip show" style="background-image: url(<%=trip.pic_path%>); background-repeat: no-repeat; background-size: 100% 100%"><h2 class="caption"><%=trip.destination%></h2></div>
+
+<p>Are you sure you want to delete <%=trip.destination%></p>
+<div class="button-container">
+    <a href=<%="/mytrips/"+trip._id+"/deleteTrue"%>><button class="button-delete">Yes</button></a>
+
+    <a href=<%="/mytrips/"+trip._id%>><button class="button-delete">No</button></a>
+
+</div>
